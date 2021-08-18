@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_lwwlYP_4EeucYsOBO4jq8A" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_up_P4P_4EeucYsOBO4jq8A" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_kafkaItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="__6BDDAFFD-9E32-49F7-B55D-21A0565304C2_kafkaOutputXItem" structureRef="Object"/>
   <bpmn2:itemDefinition id="ticket-change_intnaType" structureRef="Object"/>
-  <bpmn2:message id="_lwxMc__4EeucYsOBO4jq8A" itemRef="ticket-change_intnaType" name="ticket-change_intna"/>
+  <bpmn2:message id="_up_P5P_4EeucYsOBO4jq8A" itemRef="ticket-change_intnaType" name="ticket-change_intna"/>
   <bpmn2:process id="KafkaRead.kafka_msg_consumer" drools:packageName="org.jbpm" drools:version="1.0" drools:adHoc="false" name="kafka_msg_consumer" isExecutable="true" processType="Public">
     <bpmn2:property id="kafka" itemSubjectRef="_kafkaItem" name="kafka">
       <bpmn2:extensionElements>
@@ -12,6 +12,16 @@
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:property>
+    <bpmn2:sequenceFlow id="_63A4C660-2F0A-4FB0-A3B9-030A7E2F1584" sourceRef="_378E58B9-7C69-47F5-8E8C-1473258B1C20" targetRef="_8CF3EA99-5D04-40D9-8744-6AE92FF70AC7">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_AF6DE26E-0AEA-468A-968C-94466575CE06" sourceRef="_6BDDAFFD-9E32-49F7-B55D-21A0565304C2" targetRef="_378E58B9-7C69-47F5-8E8C-1473258B1C20">
       <bpmn2:extensionElements>
         <drools:metaData name="isAutoConnection.target">
@@ -19,6 +29,9 @@
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="_8CF3EA99-5D04-40D9-8744-6AE92FF70AC7">
+      <bpmn2:incoming>_63A4C660-2F0A-4FB0-A3B9-030A7E2F1584</bpmn2:incoming>
+    </bpmn2:endEvent>
     <bpmn2:scriptTask id="_378E58B9-7C69-47F5-8E8C-1473258B1C20" name="Task" scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -26,41 +39,51 @@
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_AF6DE26E-0AEA-468A-968C-94466575CE06</bpmn2:incoming>
-      <bpmn2:script><![CDATA[System.out.println("reading from kafka " + kafka);]]></bpmn2:script>
+      <bpmn2:outgoing>_63A4C660-2F0A-4FB0-A3B9-030A7E2F1584</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[System.out.println("reading from kafka " + kafka);
+
+System.out.println("msg read successfully ");]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:startEvent id="_6BDDAFFD-9E32-49F7-B55D-21A0565304C2">
       <bpmn2:outgoing>_AF6DE26E-0AEA-468A-968C-94466575CE06</bpmn2:outgoing>
       <bpmn2:dataOutput id="_6BDDAFFD-9E32-49F7-B55D-21A0565304C2_kafkaOutputX" drools:dtype="Object" itemSubjectRef="__6BDDAFFD-9E32-49F7-B55D-21A0565304C2_kafkaOutputXItem" name="kafka"/>
-      <bpmn2:dataOutputAssociation id="_lwxMcf_4EeucYsOBO4jq8A">
+      <bpmn2:dataOutputAssociation id="_up_P4v_4EeucYsOBO4jq8A">
         <bpmn2:sourceRef>_6BDDAFFD-9E32-49F7-B55D-21A0565304C2_kafkaOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>kafka</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
-      <bpmn2:outputSet id="_lwxMcP_4EeucYsOBO4jq8A">
+      <bpmn2:outputSet id="_up_P4f_4EeucYsOBO4jq8A">
         <bpmn2:dataOutputRefs>_6BDDAFFD-9E32-49F7-B55D-21A0565304C2_kafkaOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition id="_lwxMcv_4EeucYsOBO4jq8A" drools:msgref="ticket-change_intna" messageRef="_lwxMc__4EeucYsOBO4jq8A"/>
+      <bpmn2:messageEventDefinition id="_up_P4__4EeucYsOBO4jq8A" drools:msgref="ticket-change_intna" messageRef="_up_P5P_4EeucYsOBO4jq8A"/>
     </bpmn2:startEvent>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_lwxMdP_4EeucYsOBO4jq8A">
-    <bpmndi:BPMNPlane id="_lwxMdf_4EeucYsOBO4jq8A" bpmnElement="KafkaRead.kafka_msg_consumer">
+  <bpmndi:BPMNDiagram id="_up_28P_4EeucYsOBO4jq8A">
+    <bpmndi:BPMNPlane id="_up_28f_4EeucYsOBO4jq8A" bpmnElement="KafkaRead.kafka_msg_consumer">
       <bpmndi:BPMNShape id="shape__6BDDAFFD-9E32-49F7-B55D-21A0565304C2" bpmnElement="_6BDDAFFD-9E32-49F7-B55D-21A0565304C2">
         <dc:Bounds height="56.0" width="56.0" x="116.0" y="132.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__378E58B9-7C69-47F5-8E8C-1473258B1C20" bpmnElement="_378E58B9-7C69-47F5-8E8C-1473258B1C20">
         <dc:Bounds height="102.0" width="154.0" x="282.0" y="109.0"/>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__8CF3EA99-5D04-40D9-8744-6AE92FF70AC7" bpmnElement="_8CF3EA99-5D04-40D9-8744-6AE92FF70AC7">
+        <dc:Bounds height="56.0" width="56.0" x="516.0" y="132.0"/>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="edge_shape__6BDDAFFD-9E32-49F7-B55D-21A0565304C2_to_shape__378E58B9-7C69-47F5-8E8C-1473258B1C20" bpmnElement="_AF6DE26E-0AEA-468A-968C-94466575CE06">
         <di:waypoint xsi:type="dc:Point" x="144.0" y="160.0"/>
         <di:waypoint xsi:type="dc:Point" x="282.0" y="160.0"/>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__378E58B9-7C69-47F5-8E8C-1473258B1C20_to_shape__8CF3EA99-5D04-40D9-8744-6AE92FF70AC7" bpmnElement="_63A4C660-2F0A-4FB0-A3B9-030A7E2F1584">
+        <di:waypoint xsi:type="dc:Point" x="436.0" y="160.0"/>
+        <di:waypoint xsi:type="dc:Point" x="516.0" y="160.0"/>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_lw2sAP_4EeucYsOBO4jq8A" type="BPSimData">
+  <bpmn2:relationship id="_up_28v_4EeucYsOBO4jq8A" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_378E58B9-7C69-47F5-8E8C-1473258B1C20" id="_lw2sAf_4EeucYsOBO4jq8A">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_378E58B9-7C69-47F5-8E8C-1473258B1C20" id="_up_28__4EeucYsOBO4jq8A">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
@@ -83,7 +106,7 @@
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_lwwlYP_4EeucYsOBO4jq8A</bpmn2:source>
-    <bpmn2:target>_lwwlYP_4EeucYsOBO4jq8A</bpmn2:target>
+    <bpmn2:source>_up_P4P_4EeucYsOBO4jq8A</bpmn2:source>
+    <bpmn2:target>_up_P4P_4EeucYsOBO4jq8A</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
