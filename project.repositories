@@ -3,8 +3,8 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>snapshots</id>
-        <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-snapshot</url>
+        <id>central</id>
+        <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-release</url>
         <source>SETTINGS</source>
       </metadata>
     </repository>
@@ -19,9 +19,17 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>central</id>
-        <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-release</url>
+        <id>snapshots</id>
+        <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-snapshot</url>
         <source>SETTINGS</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>central</id>
+        <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-release-local</url>
+        <source>DISTRIBUTION_MANAGEMENT</source>
       </metadata>
     </repository>
   </repositories>
