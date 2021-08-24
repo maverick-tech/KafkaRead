@@ -8,6 +8,7 @@
   <packaging>kjar</packaging>
   <name>KafkaRead</name>
   <description></description>
+  
   <distributionManagement>
     <repository>
       <id>central</id>
@@ -15,6 +16,7 @@
       <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-release-local</url>
     </repository>
   </distributionManagement>
+  
   <dependencies>
     <dependency>
       <groupId>org.kie</groupId>
