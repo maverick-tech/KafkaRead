@@ -4,11 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.myspace</groupId>
   <artifactId>KafkaRead</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <packaging>kjar</packaging>
   <name>KafkaRead</name>
   <description></description>
-  
   <distributionManagement>
     <repository>
       <id>central</id>
@@ -16,7 +15,6 @@
       <url>https://testmaven123.jfrog.io/artifactory/newmaven-libs-release-local</url>
     </repository>
   </distributionManagement>
-  
   <dependencies>
     <dependency>
       <groupId>org.kie</groupId>
